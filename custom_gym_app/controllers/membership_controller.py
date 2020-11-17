@@ -58,7 +58,7 @@ class PortalMembership(CustomerPortal):
                      })
         return request.render("custom_gym_app.portal_my_membership", values)
 
-    @http.route(['/my/membership/<int:membership_id>'], type='http', auth="user", website=True)
+    @http.route(['/my/membership/<int:membership_id>'], type='http', auth="public", website=True)
     def portal_my_membership_detail(self, membership_id, access_token=None, report_type=None, download=False, **kw):
         try:
             membership_sudo = self._document_check_access('res.partner', membership_id, access_token)

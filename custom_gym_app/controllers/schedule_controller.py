@@ -58,7 +58,7 @@ class PortalSchedule(CustomerPortal):
                      })
         return request.render("custom_gym_app.portal_my_schedule", values)
 
-    @http.route(['/my/schedule/<int:schedule_id>'], type='http', auth="user", website=True)
+    @http.route(['/my/schedule/<int:schedule_id>'], type='http', auth="public", website=True)
     def portal_my_schedule_detail(self, schedule_id, access_token=None, report_type=None, download=False, **kw):
         try:
             schedule_sudo = self._document_check_access('planning.slot', schedule_id, access_token)

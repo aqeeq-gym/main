@@ -69,7 +69,17 @@
 	}
 
 	[href="/my/schedule"]{
-		background-color: #761157;
+		background-color: #e69900;
+		color: #fff !important;
+	}
+
+	[href="/my/membership"]{
+		background-color: #ff6666;
+		color: #fff !important;
+	}
+
+	[href="/my/subscription"]{
+		background-color: #00bfff;
 		color: #fff !important;
 	}
 }

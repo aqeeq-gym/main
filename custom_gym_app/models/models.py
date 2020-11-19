@@ -8,6 +8,7 @@ class ResPartnerInherit(models.Model):
     _inherit = 'res.partner'
 
     access_token = fields.Char('Security Token', copy=False)
+    gym_type = fields.Selection([('trainer', "Trainer"), ('member', "Member")], string='User Type')
 
     def _portal_ensure_token(self):
         """ Get the current record access token """

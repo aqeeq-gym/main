@@ -46,8 +46,8 @@
                     <t t-foreach="schedules" t-as="schedule">
                         <tr>
                             <td>
-                                <a t-att-href="schedule.get_portal_url(schedule.id, access_token)" t-att-title="schedule.user_id.name">
-                                    <t t-esc="schedule.user_id.name" t-if="schedule.user_id.name != '/'"/>
+                                <a t-att-href="schedule.get_portal_url(schedule.id, access_token)" t-att-title="schedule.employee_id.name">
+                                    <t t-esc="schedule.employee_id.name" t-if="schedule.employee_id.name != '/'"/>
                                     <em t-else="">Draft Schedule</em>
                                 </a>
                             </td>
@@ -84,7 +84,7 @@
                     <t t-set="classes" t-value="'col-lg-auto d-print-none'"/>
                     <t t-set="title">
                         <h4 class="mb-0">
-                            <b t-if="schedule.user_id.name" t-field="schedule.user_id.name"/>
+                            <b t-if="schedule.employee_id.name" t-field="schedule.employee_id.name"/>
                         </h4>
                         <div class="small" t-if="schedule.start_datetime"><i class="fa fa-clock-o"/><span class="o_portal_sidebar_timeago ml4" t-att-datetime="schedule.start_datetime"/></div>
                     </t>

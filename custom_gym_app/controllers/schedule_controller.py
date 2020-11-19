@@ -15,7 +15,16 @@ class PortalSchedule(CustomerPortal):
         if 'schedule_count' in counters:
             logged_in_user = request.env['res.users'].browse([request.session.uid])
 
-            schedule_count = request.env['planning.slot'].search_count([('employee_id.name', '=', logged_in_user.name)])
+            schedule_count = 0
+
+            if logged_in_user.partner_id.gym_type:
+                if logged_in_user.partner_id.gym_type == 'trainer':
+                    schedule_count = request.env['planning.slot'].search_count([('employee_id.name', '=', logged_in_user.name)])
+                elif logged_in_user.partner_id.gym_type == 'member':
+                    schedule_count = request.env['planning.slot'].search_count([])
+            else:
+                schedule_count = request.env['planning.slot'].search_count([])
+
             values['schedule_count'] = schedule_count
 
         return values
@@ -34,7 +43,15 @@ class PortalSchedule(CustomerPortal):
 
         logged_in_user = request.env['res.users'].browse([request.session.uid])
 
-        schedule_count = Schedule.search_count(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)])
+        schedule_count = 0
+
+        if logged_in_user.partner_id.gym_type:
+            if logged_in_user.partner_id.gym_type == 'trainer':
+                schedule_count = Schedule.search_count(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)])
+            elif logged_in_user.partner_id.gym_type == 'member':
+                schedule_count = Schedule.search_count([])
+        else:
+            schedule_count = Schedule.search_count([])
 
         pager = portal_pager(
                                 url="/my/schedule",
@@ -44,7 +61,16 @@ class PortalSchedule(CustomerPortal):
                                 step=self._items_per_page
                             )
 
-        schedules = Schedule.search(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)], order=None, limit=self._items_per_page, offset=pager['offset'])
+        schedules = None
+
+        if logged_in_user.partner_id.gym_type:
+            if logged_in_user.partner_id.gym_type == 'trainer':
+                schedules = Schedule.search(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)], order=None, limit=self._items_per_page, offset=pager['offset'])
+            elif logged_in_user.partner_id.gym_type == 'member':
+                schedules = Schedule.search([], order=None, limit=self._items_per_page, offset=pager['offset'])
+        else:
+            schedules = Schedule.search([], order=None, limit=self._items_per_page, offset=pager['offset'])
+
         request.session['my_schedule_history'] = schedules.ids[:100]
 
         values.update({

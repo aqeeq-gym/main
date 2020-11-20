@@ -65,11 +65,11 @@ class PortalSchedule(CustomerPortal):
 
         if logged_in_user.partner_id.gym_type:
             if logged_in_user.partner_id.gym_type == 'trainer':
-                schedules = Schedule.search(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)], order=None, limit=self._items_per_page, offset=pager['offset'])
+                schedules = Schedule.sudo().search(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)], order=None, limit=self._items_per_page, offset=pager['offset'])
             elif logged_in_user.partner_id.gym_type == 'member':
-                schedules = Schedule.search([], order=None, limit=self._items_per_page, offset=pager['offset'])
+                schedules = Schedule.sudo().search([], order=None, limit=self._items_per_page, offset=pager['offset'])
         else:
-            schedules = Schedule.search([], order=None, limit=self._items_per_page, offset=pager['offset'])
+            schedules = Schedule.sudo().search([], order=None, limit=self._items_per_page, offset=pager['offset'])
 
         request.session['my_schedule_history'] = schedules.ids[:100]
 

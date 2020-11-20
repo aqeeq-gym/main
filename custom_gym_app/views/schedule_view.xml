@@ -7,7 +7,7 @@
                 <t t-else="">Schedule</t>
             </li>
             <li t-if="schedule" class="breadcrumb-item active">
-                <t t-esc="schedule.role_id.name" t-if="schedule.role_id.name != '/'"/>
+                <t t-esc="schedule.employee_id.name" t-if="schedule.employee_id.name != '/'"/>
                 <t t-else=""><em>Draft Schedule</em></t>
             </li>
         </xpath>

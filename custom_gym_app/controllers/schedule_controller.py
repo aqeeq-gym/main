@@ -19,11 +19,11 @@ class PortalSchedule(CustomerPortal):
 
             if logged_in_user.partner_id.gym_type:
                 if logged_in_user.partner_id.gym_type == 'trainer':
-                    schedule_count = request.env['planning.slot'].search_count([('employee_id.name', '=', logged_in_user.name)])
+                    schedule_count = request.env['planning.slot'].sudo().search_count([('employee_id.name', '=', logged_in_user.name)])
                 elif logged_in_user.partner_id.gym_type == 'member':
-                    schedule_count = request.env['planning.slot'].search_count([])
+                    schedule_count = request.env['planning.slot'].sudo().search_count([])
             else:
-                schedule_count = request.env['planning.slot'].search_count([])
+                schedule_count = request.env['planning.slot'].sudo().search_count([])
 
             values['schedule_count'] = schedule_count
 
@@ -47,11 +47,11 @@ class PortalSchedule(CustomerPortal):
 
         if logged_in_user.partner_id.gym_type:
             if logged_in_user.partner_id.gym_type == 'trainer':
-                schedule_count = Schedule.search_count(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)])
+                schedule_count = Schedule.sudo().search_count(['|', ('user_id.name', '=', logged_in_user.name), ('employee_id.name', '=', logged_in_user.name)])
             elif logged_in_user.partner_id.gym_type == 'member':
-                schedule_count = Schedule.search_count([])
+                schedule_count = Schedule.sudo().search_count([])
         else:
-            schedule_count = Schedule.search_count([])
+            schedule_count = Schedule.sudo().search_count([])
 
         pager = portal_pager(
                                 url="/my/schedule",

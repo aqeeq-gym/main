@@ -44,4 +44,4 @@ class PlanningSlotInherit(models.Model):
 
     def _get_report_base_filename(self):
         self.ensure_one()
-        return '%s %s' % (self.user_id.name, self.start_datetime)
+        return '%s %s' % (self.employee_id.name, self.start_datetime)

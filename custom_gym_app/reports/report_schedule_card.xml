@@ -7,7 +7,7 @@
         report_type="qweb-pdf"
         name="custom_gym_app.report_schedule_card_template"
         file="custom_gym_app.report_schedule_card_template"
-        print_report_name="'Schedule - %s' % (object.user_id.name).replace('/', '')"
+        print_report_name="'Schedule - %s' % (object.employee_id.name).replace('/', '')"
     />
 
     <template id="report_schedule_card_template">
@@ -16,7 +16,7 @@
                 <t t-call="web.external_layout">
                     <div class="page" style="margin-top:15px;">
                         <h6>
-                            <strong><p t-esc="schedule.user_id.name"/></strong>
+                            <strong><p t-esc="schedule.employee_id.name"/></strong>
                         </h6>
 
                         <table class="table table-sm o_main_table">
@@ -27,7 +27,7 @@
 
                                 <tr t-if="schedule.employee_id">
                                     <th name="th_description" style="width:180px;" class="text-left"><span>Assigned To</span></th>
-                                    <td name="th_description" class="text-left"><span t-esc="schedule.user_id.name"/></td>
+                                    <td name="th_description" class="text-left"><span t-esc="schedule.employee_id.name"/></td>
                                 </tr>
 
                                 <tr t-if="schedule.role_id">

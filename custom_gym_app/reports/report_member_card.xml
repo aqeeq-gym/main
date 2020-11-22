@@ -28,7 +28,7 @@
 
                                     <tr style="height:70%;">
                                         <td align="center" valign="center">
-                                            <img t-if="member.image_1920" t-att-src="image_data_uri(member.image_1920)" style="margin-top:7.5px;margin-left:5px;max-height:85pt;max-width:90%" alt="Member Image"/>
+                                            <img t-if="member.image_1920" t-att-src="image_data_uri(member.image_1920)" style="margin-top:7.5px;max-height:85pt;max-width:90%" alt="Member Image"/>
                                         </td>
                                     </tr>
 

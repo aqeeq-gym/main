@@ -61,7 +61,7 @@
                                 <span t-field="schedule.end_datetime"/>
                             </td>
                             <td>
-                                <span t-field="schedule.allocated_hours"/>
+                                <span t-esc="'%.2f'% schedule.allocated_hours"/>
                             </td>
                         </tr>
                     </t>

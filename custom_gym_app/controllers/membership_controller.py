@@ -15,7 +15,7 @@ class PortalMembership(CustomerPortal):
         if 'membership_count' in counters:
             logged_in_user = request.env['res.users'].browse([request.session.uid])
 
-            membership_count = request.env['res.partner'].search_count([('name', '=', logged_in_user.name)])
+            membership_count = request.env['res.partner'].search_count([('user_ids', '=', logged_in_user.id)])
             values['membership_count'] = membership_count
 
         return values
@@ -34,7 +34,7 @@ class PortalMembership(CustomerPortal):
 
         logged_in_user = request.env['res.users'].browse([request.session.uid])
 
-        membership_count = Membership.search_count([('name', '=', logged_in_user.name)])
+        membership_count = Membership.search_count([('user_ids', '=', logged_in_user.id)])
 
         pager = portal_pager(
                                 url="/my/membership",
@@ -44,7 +44,7 @@ class PortalMembership(CustomerPortal):
                                 step=self._items_per_page
                             )
 
-        memberships = Membership.search([('name', '=', logged_in_user.name)], order=None, limit=self._items_per_page, offset=pager['offset'])
+        memberships = Membership.search([('user_ids', '=', logged_in_user.id)], order=None, limit=self._items_per_page, offset=pager['offset'])
         request.session['my_membership_history'] = memberships.ids[:100]
 
         values.update({

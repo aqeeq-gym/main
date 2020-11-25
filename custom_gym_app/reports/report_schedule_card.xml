@@ -47,7 +47,7 @@
 
                                 <tr t-if="schedule.allocated_hours">
                                     <th name="th_description" style="width:180px;" class="text-left"><span>Allocated Hours</span></th>
-                                    <td name="th_description" class="text-left"><span t-esc="schedule.allocated_hours"/></td>
+                                    <td name="th_description" class="text-left"><span t-esc="'%.2f'% schedule.allocated_hours"/></td>
                                 </tr>
                             </thead>
                         </table>

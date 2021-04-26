@@ -6,7 +6,7 @@
         <field name="property_account_payable_id" ref="41001"/>
         <field name="property_account_income_categ_id" ref="41001"/>
         <field name="property_account_income_id" ref="41001"/>
-        <field name="default_pos_receivable_account_id" ref="12002" />
+        <field name="default_pos_receivable_account_id" ref="12002001" />
         
         <!--<field name="property_account_expense_id" ref="12002" />
         
